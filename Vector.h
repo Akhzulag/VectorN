@@ -10,7 +10,7 @@ class Vector
 {
 private:
     int *vector;
-    int dimention;
+    int dimension;
 public:
     int getDimention() const;
     int operator [] (const int& ) const;

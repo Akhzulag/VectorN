@@ -5,11 +5,11 @@
 #include "Vector.h"
 #include <iostream>
 
-Vector::Vector(int dimention)
+Vector::Vector(int dimension)
 {
-    this->dimention = dimention;
+    this->dimension = dimension;
 
-    this->vector = allocate(dimention);
+    this->vector = allocate(dimension);
 
 }
 
@@ -17,8 +17,8 @@ Vector::Vector(int dimention)
 
 Vector::Vector(int* begin, int* end)
 {
-    this->dimention = (end-begin);
-    this->vector = allocate(this->dimention);
+    this->dimension = (end-begin);
+    this->vector = allocate(this->dimension);
 
     for(int i = 0; (begin+i) != end ; ++i)
         this->vector[i] = begin[i];
@@ -30,10 +30,10 @@ bool Vector::operator == (const Vector & right) const
     if (this == &right)
         return true;
 
-    if(this->dimention != right.dimention)
+    if(this->dimension != right.dimension)
         return false;
 
-    for(int i = 0; i < dimention; ++i)
+    for(int i = 0; i < dimension; ++i)
         if(this->vector[i] != right.vector[i])
             return false;
 
@@ -55,12 +55,12 @@ int Vector::operator [] (const int& index) const
 
 int Vector::dotProduct(const Vector& Vector) const
 {
-    if(this->dimention != Vector.dimention)
-        throw "Dimention for dot product must be equal";
+    if(this->dimension != Vector.dimension)
+        throw "dimension for dot product must be equal";
 
     int result = 0;
 
-    for(int i = 0; i < this->dimention; ++i)
+    for(int i = 0; i < this->dimension; ++i)
         result += this->vector[i] * Vector[i];
 
     return result;
@@ -68,12 +68,12 @@ int Vector::dotProduct(const Vector& Vector) const
 
 Vector Vector::addition(const Vector&  vector) const
 {
-    if(this->dimention != vector.dimention)
-        throw "Dimention for dot product must be equal";
+    if(this->dimension != vector.dimension)
+        throw "dimension for dot product must be equal";
 
-    Vector *tmp = new Vector(this->dimention);
+    Vector *tmp = new Vector(this->dimension);
 
-    for(int i = 0; i < this->dimention; ++i)
+    for(int i = 0; i < this->dimension; ++i)
         tmp->vector[i] = this->vector[i] + vector.vector[i];
 
 
@@ -82,12 +82,12 @@ Vector Vector::addition(const Vector&  vector) const
 
 Vector Vector::subtraction(const Vector&  vector) const
 {
-    if(this->dimention != vector.dimention)
-        throw "Dimention for dot product must be equal";
+    if(this->dimension != vector.dimension)
+        throw "dimension for dot product must be equal";
 
-    Vector *tmp = new Vector(this->dimention);
+    Vector *tmp = new Vector(this->dimension);
 
-    for(int i = 0; i < this->dimention; ++i)
+    for(int i = 0; i < this->dimension; ++i)
         tmp->vector[i] = this->vector[i] - vector.vector[i];
 
     return *tmp;
@@ -95,7 +95,7 @@ Vector Vector::subtraction(const Vector&  vector) const
 
 int Vector::getDimention() const
 {
-    return this->dimention;
+    return this->dimension;
 }
 
 int* Vector::allocate(int dim)
